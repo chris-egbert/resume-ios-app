@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC3905251B9B000400AA838F /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3905241B9B000400AA838F /* WebViewController.m */; };
 		BC9F6A0F1B9AF94C00A458CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9F6A0E1B9AF94C00A458CA /* main.m */; };
 		BC9F6A121B9AF94C00A458CA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9F6A111B9AF94C00A458CA /* AppDelegate.m */; };
 		BC9F6A151B9AF94C00A458CA /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9F6A141B9AF94C00A458CA /* RootViewController.m */; };
@@ -29,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC3905231B9B000400AA838F /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		BC3905241B9B000400AA838F /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		BC9F6A091B9AF94C00A458CA /* Resume Chris Egbert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Resume Chris Egbert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC9F6A0D1B9AF94C00A458CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC9F6A0E1B9AF94C00A458CA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 				BC9F6A171B9AF94C00A458CA /* DataViewController.m */,
 				BC9F6A191B9AF94C00A458CA /* ModelController.h */,
 				BC9F6A1A1B9AF94C00A458CA /* ModelController.m */,
+				BC3905231B9B000400AA838F /* WebViewController.h */,
+				BC3905241B9B000400AA838F /* WebViewController.m */,
 				BC9F6A1C1B9AF94C00A458CA /* Main.storyboard */,
 				BC9F6A1F1B9AF94C00A458CA /* Images.xcassets */,
 				BC9F6A211B9AF94C00A458CA /* LaunchScreen.xib */,
@@ -230,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC9F6A181B9AF94C00A458CA /* DataViewController.m in Sources */,
+				BC3905251B9B000400AA838F /* WebViewController.m in Sources */,
 				BC9F6A121B9AF94C00A458CA /* AppDelegate.m in Sources */,
 				BC9F6A1B1B9AF94C00A458CA /* ModelController.m in Sources */,
 				BC9F6A0F1B9AF94C00A458CA /* main.m in Sources */,
@@ -430,6 +436,7 @@
 				BC9F6A341B9AF94C00A458CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BC9F6A351B9AF94C00A458CA /* Build configuration list for PBXNativeTarget "Resume Chris EgbertTests" */ = {
 			isa = XCConfigurationList;
@@ -438,6 +445,7 @@
 				BC9F6A371B9AF94C00A458CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,6 +8,7 @@
 
 #import "ModelController.h"
 #import "DataViewController.h"
+#import "WebViewController.h"
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -29,29 +30,57 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        // Create the data model.
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];
+      // Initialization code
     }
     return self;
 }
 
-- (DataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard {
+- (UIViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard {
     // Return the data view controller for the given index.
-    if (([self.pageData count] == 0) || (index >= [self.pageData count])) {
+    if (([[self getPageList] count] == 0) || (index >= [[self getPageList] count])) {
         return nil;
     }
+    
+    NSString *viewControllerTitle = [[self getPageList] objectAtIndex:index];
 
-    // Create a new view controller and pass suitable data.
-    DataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"DataViewController"];
-    dataViewController.dataObject = self.pageData[index];
-    return dataViewController;
+    UIViewController *viewController = [self getViewControllerWithTitle:viewControllerTitle andStoryboard:storyboard];
+    return viewController;
 }
 
-- (NSUInteger)indexOfViewController:(DataViewController *)viewController {
+- (NSUInteger)indexOfViewController:(UIViewController *)viewController {
     // Return the index of the given data view controller.
     // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
-    return [self.pageData indexOfObject:viewController.dataObject];
+    return [[self getPageList] indexOfObject:viewController.title];
+}
+
+// Static list of pages to be shown
+- (NSArray *)getPageList {
+    NSArray *pageList = @[
+                          @"resume",
+                          @"welcome",
+                          ];
+    return pageList;
+}
+
+// Instantiate the view controller to shown
+- (UIViewController *)getViewControllerWithTitle:(NSString *)title andStoryboard:(UIStoryboard *)storyboard {
+
+    UIViewController *viewController;
+    
+    // Resume
+    if ([title isEqualToString:@"resume"]) {
+        WebViewController *resumeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
+        NSString *urlString = @"https://cloud-dev.waveuc.com/resume-chris-egbert.html";
+        resumeViewController.labelString = urlString;
+        resumeViewController.titleString = @"My Online Resume";
+        resumeViewController.urlString = urlString;
+        viewController = (UIViewController *)resumeViewController;
+    } else {
+        DataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"DataViewController"];
+        viewController = (UIViewController *)dataViewController;
+    }
+    viewController.title = title;
+    return viewController;
 }
 
 #pragma mark - Page View Controller Data Source
@@ -69,13 +98,13 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [self indexOfViewController:(DataViewController *)viewController];
+    NSUInteger index = [self indexOfViewController:viewController];
     if (index == NSNotFound) {
         return nil;
     }
     
     index++;
-    if (index == [self.pageData count]) {
+    if (index == [[self getPageList] count]) {
         return nil;
     }
     return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
