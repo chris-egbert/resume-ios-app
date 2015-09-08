@@ -7,8 +7,10 @@
 //
 
 #import "ModelController.h"
-#import "DataViewController.h"
+#import "WelcomeViewController.h"
 #import "WebViewController.h"
+#import "PlacesViewController.h"
+#import "NetRequestViewController.h"
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -56,8 +58,10 @@
 // Static list of pages to be shown
 - (NSArray *)getPageList {
     NSArray *pageList = @[
-                          @"resume",
                           @"welcome",
+                          @"map",
+                          @"net-request",
+                          @"resume",
                           ];
     return pageList;
 }
@@ -67,17 +71,38 @@
 
     UIViewController *viewController;
     
-    // Resume
     if ([title isEqualToString:@"resume"]) {
+
+        // Resume
         WebViewController *resumeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
         NSString *urlString = @"https://cloud-dev.waveuc.com/resume-chris-egbert.html";
         resumeViewController.labelString = urlString;
         resumeViewController.titleString = @"My Online Resume";
         resumeViewController.urlString = urlString;
         viewController = (UIViewController *)resumeViewController;
+
+    } else if ([title isEqualToString:@"map"]) {
+
+        // Map
+        PlacesViewController *placesViewController = [storyboard instantiateViewControllerWithIdentifier:@"PlacesViewController"];
+        placesViewController.titleString = @"Chris's Location";
+        placesViewController.labelString = @"The red pin indicates where Chris is located";
+        viewController = (UIViewController *)placesViewController;
+        
+    } else if ([title isEqualToString:@"net-request"]) {
+        
+        // Net Request
+        NetRequestViewController *netRequestViewController = [storyboard instantiateViewControllerWithIdentifier:@"NetRequestViewController"];
+        netRequestViewController.titleString = @"Network Async Request";
+        netRequestViewController.labelString = @"Data is loaded asynchronously; Net image is cached";
+        viewController = (UIViewController *)netRequestViewController;
+
+        
     } else {
-        DataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"DataViewController"];
-        viewController = (UIViewController *)dataViewController;
+        
+        // Welcome
+        WelcomeViewController *welcomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
+        viewController = (UIViewController *)welcomeViewController;
     }
     viewController.title = title;
     return viewController;
@@ -87,7 +112,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [self indexOfViewController:(DataViewController *)viewController];
+    NSUInteger index = [self indexOfViewController:viewController];
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
